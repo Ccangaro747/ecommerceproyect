@@ -38,6 +38,7 @@ const MenuList = ({ open, setOpen }) => {
           <Link className="hover:text-gray-500 text-lg" onClick={handleClose} href={"/nosotros"}>Nosotros</Link>
           <Link className="hover:text-gray-500 text-lg mb-4" onClick={handleClose} href={"/contacto"}>Contacto</Link>
           <Link className="hover:text-gray-500 text-lg mb-4" onClick={handleClose} href={"/administracion"}>Panel de administracion</Link>
+          <Link className="hover:text-gray-500 text-lg mb-4" onClick={handleClose} href={"/posts"}>Posts</Link>
         </nav>
       </aside>
     </div>

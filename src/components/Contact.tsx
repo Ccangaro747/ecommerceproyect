@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import { useState } from "react";
-import Container from './Container';
+import Container from "./Container";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -27,9 +27,15 @@ const ContactForm = () => {
 
   return (
     <Container className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto p-8 bg-white rounded shadow-md">
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-md mx-auto p-8 bg-white rounded shadow-md"
+      >
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
+          <label
+            htmlFor="name"
+            className="block text-gray-700 font-semibold mb-2"
+          >
             Nombre
           </label>
           <input
@@ -44,7 +50,10 @@ const ContactForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
+          <label
+            htmlFor="email"
+            className="block text-gray-700 font-semibold mb-2"
+          >
             Correo Electrónico
           </label>
           <input
@@ -59,7 +68,10 @@ const ContactForm = () => {
         </div>
 
         <div className="mb-6">
-          <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">
+          <label
+            htmlFor="message"
+            className="block text-gray-700 font-semibold mb-2"
+          >
             Mensaje
           </label>
           <textarea
@@ -74,18 +86,14 @@ const ContactForm = () => {
         </div>
 
         <button
-
-type="submit"
-className="bg-black hover:bg-slate-950 text-white font-bold py-2 px-4 rounded"
->
-Enviar Mensaje
-</button>
-
+          type="submit"
+          className="bg-black hover:bg-slate-950 text-white font-bold py-2 px-4 rounded"
+        >
+          Enviar Mensaje
+        </button>
       </form>
     </Container>
   );
 };
 
 export default ContactForm;
-
-

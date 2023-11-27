@@ -1,5 +1,4 @@
-import ProductCard from "../../../components/products/ProductCard"
-import { mockData } from "../../../../data/product"
+import ProductCard from "@/components/products/ProductCard"
 
 export const generateMetadata = async ({params}) => {
     return {
@@ -7,15 +6,15 @@ export const generateMetadata = async ({params}) => {
     }
 }
 
-const Productos = ({params}) => {
+const Productos = async ({params}) => {
     const { categoria } = params
-
-    const items = categoria === 'all'
-                    ? mockData
-                    : mockData.filter(product => product.type === categoria)
+    const response = await fetch(`http://localhost:3000/api/productos/${categoria}`, {
+        cache: 'no-store'
+    })
+    const items = await response.json()
 
     return (
-        <div className="container m-auto pt-4">
+        <div className="container m-auto pt-8">
             <h2 className="text-4xl text-bold">Productos</h2>
             <hr/>
             
