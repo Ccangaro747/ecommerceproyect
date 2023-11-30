@@ -1,37 +1,24 @@
-import { useRouter } from "next/router";
-import { getPostById } from "../utils";
-import Boton from "@/components/ui/Boton";
-import { useEffect, useState } from "react";
+"use client"
+import { useRouter } from "next/navigation"
+import { getPostById } from "../utils"
+import Boton from "@/components/Boton"
 
-const Post = ({ id }) => {
-  const router = useRouter();
-  const [post, setPost] = useState(null);
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      const fetchedPost = await getPostById(id);
-      setPost(fetchedPost);
-    };
+const Post = async ({ params }) => {
+    const { back } = useRouter()
 
-    fetchPost();
-  }, [id]);
+    const { id } = params
+    const post = await getPostById(id)
 
-  if (!post) {
-    return <div>Cargando...</div>;
-  }
+    return (
+        <div>
+            <h2>{post.title}</h2>
+            <hr/>
+            <p>{post.body}</p>
 
-  return (
-    <div>
-      <h2>{post.title}</h2>
-      <hr />
-      <p>{post.body}</p>
-
-      <Boton className="my-8" onClick={() => router.back()}>
-        Volver
-      </Boton>
-    </div>
-  );
-};
-
+            <Boton className="my-8" onClick={back}>Volver</Boton>
+        </div>
+    )
+}
 
 export default Post
