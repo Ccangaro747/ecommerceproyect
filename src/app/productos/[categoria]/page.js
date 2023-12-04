@@ -1,29 +1,22 @@
-import ProductCard from "@/components/products/ProductCard"
+import React from "react";
+import CustomSuspense from "../../../components/CustomSuspense";
+import ProductList from "../../../components/products/ProductList";
 
-export const generateMetadata = async ({params}) => {
-    return {
-        title: 'CoderApp - ' + params.categoria
-    }
-}
+const Productos = ({ params }) => {
+  const { categoria } = params;
 
-const Productos = async ({params}) => {
-    const { categoria } = params
-    const response = await fetch(`http://localhost:3000/api/productos/${categoria}`, {
-        cache: 'no-store'
-    })
-    const items = await response.json()
+  return (
+    <div className="container m-auto pt-8">
+      <h2 className="text-4xl font-bold">Productos</h2>
+      <hr />
+      <CustomSuspense>
+        <ProductList categoria={categoria} />
+      </CustomSuspense>
+    </div>
+  );
+};
 
-    return (
-        <div className="container m-auto pt-8">
-            <h2 className="text-4xl text-bold">Productos</h2>
-            <hr/>
-            
-            <section className="flex justify-center items-center gap-10 flex-wrap">
+export default Productos;
 
-                { items.map(product => <ProductCard key={product.slug} item={product}/>) }
-            </section>
-        </div>
-    )
-}
 
-export default Productos
+
