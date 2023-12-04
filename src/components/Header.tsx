@@ -1,45 +1,47 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   getFirestore,
   collection,
   query,
   where,
   onSnapshot,
-} from 'firebase/firestore';
-import { initializeApp } from 'firebase/app';
-import Container from './Container';
-import Logo from './Logo';
-import { IoMdCart } from 'react-icons/io';
-import { FiSearch } from 'react-icons/fi';
-import { AiOutlineUser } from 'react-icons/ai';
-import Menu from './Menu';
+} from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import Container from "./Container";
+import Logo from "./Logo";
+import { IoMdCart } from "react-icons/io";
+import { FiSearch } from "react-icons/fi";
+import { AiOutlineUser } from "react-icons/ai";
+import { useCartContext } from "../../contexts/CartContext";
+import Menu from "./Menu";
 
 const Header = () => {
-  const [cart, setCart] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const { cart, calculateTotal, addToCart  } = useCartContext();
+  
+  const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Configura tu aplicación Firebase (reemplaza con tu configuración real)
+    // Configura tu aplicación Firebase
     const firebaseConfig = {
-      apiKey: 'AIzaSyBNb6LMR_Yxix4gLdPsFJha-t4NjtuxFDQ',
-      authDomain: 'cc747-40462.firebaseapp.com',
-      projectId: 'cc747-40462',
-      storageBucket: 'cc747-40462.appspot.com',
-      messagingSenderId: '471597257898',
-      appId: '1:471597257898:web:d3aae064404c100aa96cd3',
+      apiKey: "AIzaSyBNb6LMR_Yxix4gLdPsFJha-t4NjtuxFDQ",
+      authDomain: "cc747-40462.firebaseapp.com",
+      projectId: "cc747-40462",
+      storageBucket: "cc747-40462.appspot.com",
+      messagingSenderId: "471597257898",
+      appId: "1:471597257898:web:d3aae064404c100aa96cd3",
     };
 
     // Inicializa Firebase
     const app = initializeApp(firebaseConfig);
 
-    // Configura tu conexión a la base de datos de Firebase
+    // Conexión a la base de datos de Firebase
     const db = getFirestore(app);
-    const productosCollection = collection(db, 'productos');
+    const productosCollection = collection(db, "productos");
 
     // Consulta de productos filtrados por término de búsqueda
-    const q = query(productosCollection, where('title', '>=', ''));
+    const q = query(productosCollection, where("title", ">=", ""));
 
     // Escucha cambios en la base de datos y actualiza el estado de los productos
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -53,15 +55,6 @@ const Header = () => {
     // Limpia el listener cuando el componente se desmonta
     return () => unsubscribe();
   }, []);
-
-  const addToCart = (product) => {
-    setCart([...cart, product]);
-  };
-
-  const calculateTotal = () => {
-    const total = cart.reduce((acc, product) => acc + product.price, 0);
-    return `$${total.toFixed(2)}`;
-  };
 
   const handleSearchChange = (event) => {
     const searchTerm = event.target.value.toLowerCase();
@@ -77,42 +70,53 @@ const Header = () => {
     <div className="bg-bodyColor h-20">
       <Container className="h-full flex items-center md:gap-x-5 justify-between md:justify-start">
         <Logo />
-
         {/* Search Field */}
-        <div className="md:w-full relative">
-          <div className="bg-white flex items-center gap-x-1 border-[1px] border-lightText/50 rounded-full px-4 py-1.5 focus-within:border-orange-600 group relative">
-            <FiSearch className="text-gray-500 group-focus-within:text-darkText duration-200" />
-            <input
-              type="text"
-              placeholder="Search for products"
-              className="placeholder:text-sm flex-1 outline-none"
-              onChange={handleSearchChange}
-            />
-          </div>
+<div className="md:w-full relative">
+  <div className="bg-white flex items-center gap-x-1 border-[1px] border-lightText/50 rounded-full px-4 py-1.5 focus-within:border-orange-600 group relative">
+    <FiSearch className="text-gray-500 group-focus-within:text-darkText duration-200" />
+    <input
+      type="text"
+      placeholder="Search for products"
+      className="placeholder:text-sm flex-1 outline-none"
+      onChange={handleSearchChange}
+    />
+    {searchTerm && (
+      <button
+        className="ml-2 cursor-pointer"
+        onClick={() => {
+          setSearchTerm('');
+          // Puedes agregar aquí más lógica, como cerrar el desplegable
+        }}
+      >
+        &#x2715;
+      </button>
+    )}
+  </div>
 
-          {searchTerm && filteredProducts.length > 0 && (
-            <div className="absolute top-full z-10 left-0 right-0 bg-white border rounded-md mt-1 overflow-hidden">
-              {filteredProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="p-2 hover:bg-gray-100 cursor-pointer flex items-center"
-                >
-                  <img
-                    src={`/imgs/products/${product.image}`} // Asegúrate de que esta ruta sea correcta
-                    alt={product.title}
-                    className="w-10 h-10 object-cover rounded-md mr-2"
-                  />
-                  <div>
-                    <p>{product.title}</p>
-                    <button onClick={() => addToCart(product)}>
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+  {searchTerm && filteredProducts.length > 0 && (
+    <div className="absolute top-full z-10 left-0 right-0 bg-white border rounded-md mt-1 overflow-hidden">
+      {filteredProducts.map((product) => (
+        <div
+          key={product.id}
+          className="p-2 hover:bg-gray-100 cursor-pointer flex items-center"
+        >
+          <img
+            src={`/imgs/products/${product.image}`}
+            alt={product.title}
+            className="w-10 h-10 object-cover rounded-md mr-2"
+          />
+          <div>
+            <p>{product.title}</p>
+            <button onClick={() => addToCart(product)}>
+              Add to Cart
+            </button>
+          </div>
         </div>
+      ))}
+    </div>
+  )}
+</div>
+
 
         {/* Login/Register - Solo visible en dispositivos mayores a 'md' */}
         <div className="hidden md:flex items-center gap-x-1 headerDiv">
@@ -137,4 +141,3 @@ const Header = () => {
 };
 
 export default Header;
-
