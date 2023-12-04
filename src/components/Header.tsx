@@ -17,13 +17,13 @@ import { useCartContext } from "../../contexts/CartContext";
 import Menu from "./Menu";
 
 const Header = () => {
-  const { cart, calculateTotal, addToCart  } = useCartContext();
-  
+  const { cart, calculateTotal, addToCart } = useCartContext();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Configura tu aplicación Firebase
+    //Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyBNb6LMR_Yxix4gLdPsFJha-t4NjtuxFDQ",
       authDomain: "cc747-40462.firebaseapp.com",
@@ -33,7 +33,7 @@ const Header = () => {
       appId: "1:471597257898:web:d3aae064404c100aa96cd3",
     };
 
-    // Inicializa Firebase
+    // Inicializar
     const app = initializeApp(firebaseConfig);
 
     // Conexión a la base de datos de Firebase
@@ -43,7 +43,7 @@ const Header = () => {
     // Consulta de productos filtrados por término de búsqueda
     const q = query(productosCollection, where("title", ">=", ""));
 
-    // Escucha cambios en la base de datos y actualiza el estado de los productos
+    // Cambios en la base de datos y actualiza el estado de los productos
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -52,7 +52,7 @@ const Header = () => {
       setProducts(data);
     });
 
-    // Limpia el listener cuando el componente se desmonta
+    // Limpiar el listener cuando el componente se desmonta
     return () => unsubscribe();
   }, []);
 
@@ -71,52 +71,50 @@ const Header = () => {
       <Container className="h-full flex items-center md:gap-x-5 justify-between md:justify-start">
         <Logo />
         {/* Search Field */}
-<div className="md:w-full relative">
-  <div className="bg-white flex items-center gap-x-1 border-[1px] border-lightText/50 rounded-full px-4 py-1.5 focus-within:border-orange-600 group relative">
-    <FiSearch className="text-gray-500 group-focus-within:text-darkText duration-200" />
-    <input
-      type="text"
-      placeholder="Search for products"
-      className="placeholder:text-sm flex-1 outline-none"
-      onChange={handleSearchChange}
-    />
-    {searchTerm && (
-      <button
-        className="ml-2 cursor-pointer"
-        onClick={() => {
-          setSearchTerm('');
-          // Puedes agregar aquí más lógica, como cerrar el desplegable
-        }}
-      >
-        &#x2715;
-      </button>
-    )}
-  </div>
-
-  {searchTerm && filteredProducts.length > 0 && (
-    <div className="absolute top-full z-10 left-0 right-0 bg-white border rounded-md mt-1 overflow-hidden">
-      {filteredProducts.map((product) => (
-        <div
-          key={product.id}
-          className="p-2 hover:bg-gray-100 cursor-pointer flex items-center"
-        >
-          <img
-            src={`/imgs/products/${product.image}`}
-            alt={product.title}
-            className="w-10 h-10 object-cover rounded-md mr-2"
-          />
-          <div>
-            <p>{product.title}</p>
-            <button onClick={() => addToCart(product)}>
-              Add to Cart
-            </button>
+        <div className="md:w-full relative">
+          <div className="bg-white flex items-center gap-x-1 border-[1px] border-lightText/50 rounded-full px-4 py-1.5 focus-within:border-orange-600 group relative">
+            <FiSearch className="text-gray-500 group-focus-within:text-darkText duration-200" />
+            <input
+              type="text"
+              placeholder="Search for products"
+              className="placeholder:text-sm flex-1 outline-none"
+              onChange={handleSearchChange}
+            />
+            {searchTerm && (
+              <button
+                className="ml-2 cursor-pointer"
+                onClick={() => {
+                  setSearchTerm("");
+                }}
+              >
+                &#x2715;
+              </button>
+            )}
           </div>
-        </div>
-      ))}
-    </div>
-  )}
-</div>
 
+          {searchTerm && filteredProducts.length > 0 && (
+            <div className="absolute top-full z-10 left-0 right-0 bg-white border rounded-md mt-1 overflow-hidden">
+              {filteredProducts.map((product) => (
+                <div
+                  key={product.id}
+                  className="p-2 hover:bg-gray-100 cursor-pointer flex items-center"
+                >
+                  <img
+                    src={`/imgs/products/${product.image}`}
+                    alt={product.title}
+                    className="w-10 h-10 object-cover rounded-md mr-2"
+                  />
+                  <div>
+                    <p>{product.title}</p>
+                    <button onClick={() => addToCart(product)}>
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Login/Register - Solo visible en dispositivos mayores a 'md' */}
         <div className="hidden md:flex items-center gap-x-1 headerDiv">
