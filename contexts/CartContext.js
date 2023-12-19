@@ -7,6 +7,11 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
+    if (!product || !product.price || typeof product.price !== 'number') {
+      console.error("Producto inválido o precio no numérico:", product);
+      return;
+    }
+
     setCart([...cart, product]);
   };
 
@@ -19,12 +24,23 @@ export const CartProvider = ({ children }) => {
   };
 
   const calculateTotal = () => {
-    const total = cart.reduce((acc, product) => acc + product.price, 0);
+    const total = cart.reduce((acc, product) => {
+      return acc + product.price;
+    }, 0);
+
     return `$${total.toFixed(2)}`;
   };
 
+  const contextValue = {
+    cart,
+    addToCart,
+    removeFromCart,
+    isInCart,
+    calculateTotal,
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, isInCart, calculateTotal }}>
+    <CartContext.Provider value={contextValue}>
       {children}
     </CartContext.Provider>
   );
@@ -33,3 +49,6 @@ export const CartProvider = ({ children }) => {
 export const useCartContext = () => {
   return useContext(CartContext);
 };
+
+
+

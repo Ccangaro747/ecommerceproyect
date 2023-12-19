@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import {
   getFirestore,
@@ -15,15 +16,16 @@ import { FiSearch } from "react-icons/fi";
 import { AiOutlineUser } from "react-icons/ai";
 import { useCartContext } from "../../contexts/CartContext";
 import Menu from "./Menu";
+import Image from "next/image";
 
 const Header = () => {
-  const { cart, calculateTotal, addToCart } = useCartContext();
+  const { cart, calculateTotal, addToCart, removeFromCart, isInCart } = useCartContext();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    //Firebase
+    // Configuración de Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyBNb6LMR_Yxix4gLdPsFJha-t4NjtuxFDQ",
       authDomain: "cc747-40462.firebaseapp.com",
@@ -33,7 +35,7 @@ const Header = () => {
       appId: "1:471597257898:web:d3aae064404c100aa96cd3",
     };
 
-    // Inicializar
+    // Inicializar Firebase
     const app = initializeApp(firebaseConfig);
 
     // Conexión a la base de datos de Firebase
@@ -43,7 +45,7 @@ const Header = () => {
     // Consulta de productos filtrados por término de búsqueda
     const q = query(productosCollection, where("title", ">=", ""));
 
-    // Cambios en la base de datos y actualiza el estado de los productos
+    // Actualiza el estado de los productos cuando hay cambios en la base de datos
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -52,7 +54,7 @@ const Header = () => {
       setProducts(data);
     });
 
-    // Limpiar el listener cuando el componente se desmonta
+    // Limpia el listener cuando el componente se desmonta
     return () => unsubscribe();
   }, []);
 
@@ -70,13 +72,13 @@ const Header = () => {
     <div className="bg-bodyColor h-20">
       <Container className="h-full flex items-center md:gap-x-5 justify-between md:justify-start">
         <Logo />
-        {/* Search Field */}
+        {/* Campo de búsqueda */}
         <div className="md:w-full relative">
           <div className="bg-white flex items-center gap-x-1 border-[1px] border-lightText/50 rounded-full px-4 py-1.5 focus-within:border-orange-600 group relative">
             <FiSearch className="text-gray-500 group-focus-within:text-darkText duration-200" />
             <input
               type="text"
-              placeholder="Search for products"
+              placeholder="Buscar productos"
               className="placeholder:text-sm flex-1 outline-none"
               onChange={handleSearchChange}
             />
@@ -99,16 +101,24 @@ const Header = () => {
                   key={product.id}
                   className="p-2 hover:bg-gray-100 cursor-pointer flex items-center"
                 >
-                  <img
-                    src={`/imgs/products/${product.image}`}
+                  <Image
+                    src={product.image}
                     alt={product.title}
-                    className="w-10 h-10 object-cover rounded-md mr-2"
+                    width={40}
+                    height={40}
+                    className="object-cover rounded-md mr-2"
                   />
                   <div>
                     <p>{product.title}</p>
-                    <button onClick={() => addToCart(product)}>
-                      Add to Cartaaaaaaaaaa
-                    </button>
+                    {isInCart(product) ? (
+                      <button onClick={() => removeFromCart(product)}>
+                        Remove from Cart
+                      </button>
+                    ) : (
+                      <button onClick={() => addToCart(product)}>
+                        Add to Cart
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -122,7 +132,7 @@ const Header = () => {
           <p className="text-sm font-semibold">Login/Register</p>
         </div>
 
-        {/* Cart button - Solo visible en dispositivos mayores a 'md' */}
+        {/* Botón del carrito - Solo visible en dispositivos mayores a 'md' */}
         <div className="hidden md:flex bg-black hover:bg-slate-950 rounded-full text-slate-100 hover:text-white items-center justify-center gap-x-1 px-3 py-1.5 border-[1px] border-black hover:border-orange-600 duration-200 relative">
           <IoMdCart className="text-xl" />
           <p className="text-sm font-semibold">{calculateTotal()}</p>
@@ -131,7 +141,7 @@ const Header = () => {
           </span>
         </div>
 
-        {/* Desplegable */}
+        {/* Menú desplegable */}
         <Menu />
       </Container>
     </div>
@@ -139,3 +149,4 @@ const Header = () => {
 };
 
 export default Header;
+
