@@ -107,7 +107,7 @@ const Header = () => {
                   <div>
                     <p>{product.title}</p>
                     <button onClick={() => addToCart(product)}>
-                      Add to Cart
+                      Add to Cartaaaaaaaaaa
                     </button>
                   </div>
                 </div>
