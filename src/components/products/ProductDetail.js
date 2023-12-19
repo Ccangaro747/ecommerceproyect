@@ -1,9 +1,10 @@
-"use client";
+"use client"
 
 import React from "react";
 import { useCartContext } from "@/contexts/CartContext";
 import Boton from "@/components/Boton";
 import Link from "next/link";
+import Image from "next/image";
 
 const ProductDetail = ({ item }) => {
   const { addToCart, removeFromCart, isInCart } = useCartContext();
@@ -18,11 +19,14 @@ const ProductDetail = ({ item }) => {
     <div className="flex flex-col items-center p-4 shadow-md">
       <h2 className="text-3xl font-bold mb-2">{title}</h2>
       <p className="text-gray-600 mb-4">{description}</p>
-      <img
-        src={`/imgs/products/${image}`}
-        alt={title}
-        className="w-48 h-48 object-cover rounded-md mb-4"
-      />
+      <div className="rounded-md overflow-hidden">
+        <Image 
+          alt={item.title}
+          src={item.image}
+          width={150}
+          height={150}
+        />
+      </div>
       <p className="text-2xl font-semibold mb-2">${price.toFixed(2)}</p>
       <div className="flex gap-4">
         <Link
@@ -52,3 +56,5 @@ const ProductDetail = ({ item }) => {
 };
 
 export default ProductDetail;
+
+
