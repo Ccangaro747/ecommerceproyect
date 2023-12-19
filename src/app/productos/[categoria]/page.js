@@ -2,6 +2,7 @@ import React from "react";
 import CustomSuspense from "../../../components/CustomSuspense";
 import ProductList from "../../../components/products/ProductList";
 
+
 const Productos = ({ params }) => {
   const { categoria } = params;
 
