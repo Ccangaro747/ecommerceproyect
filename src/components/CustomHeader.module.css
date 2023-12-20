@@ -1,0 +1,45 @@
+
+.container {
+    text-align: center; 
+  }
+  
+  .button {
+    margin-bottom: 16px; 
+  }
+  
+  .arrow {
+    font-size: 2rem; 
+    animation: moveArrow 2s infinite alternate; 
+  }
+  
+  @keyframes moveArrow {
+    0% {
+      transform: translateX(0); 
+    }
+    100% {
+      transform: translateX(10px); 
+    }
+  }
+  
+
+  @media (min-width: 768px) {
+    .container {
+      text-align: left; 
+    }
+  
+    .button {
+      margin-bottom: 0; 
+    }
+  
+    .arrow {
+      font-size: 1.5rem; 
+      animation: moveArrow 2s infinite alternate; 
+    }
+  }
+  
+  
+  
+  
+
+  
+  
