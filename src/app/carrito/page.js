@@ -1,15 +1,14 @@
 "use client";
-"use client";
 import React from "react";
 import { useCartContext } from "../../../contexts/CartContext";
-import Image from "next/image"; // Importa el componente Image de Next.js
+import Image from "next/image";
 import Link from "next/link";
 
 const Carrito = () => {
   const { cart, removeFromCart } = useCartContext();
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex flex-col justify-start items-center min-h-screen mt-8">
       <div className="max-w-2xl w-full bg-white p-8 rounded-md shadow-md">
         <h1 className="text-2xl font-bold mb-4">Carrito de Compras</h1>
         {cart.length === 0 ? (
@@ -18,10 +17,10 @@ const Carrito = () => {
           <>
             <ul className="list-none p-0">
               {cart.map((product) => (
-                <li key={product.id} className="flex items-center py-3 border-b border-gray-300">
+                <li key={product.id} className="flex items-center py-4 border-b border-gray-300">
                   <div className="w-20 h-20 mr-4">
-                    <Image 
-                      src={product.image || productImage} 
+                    <Image
+                      src={product.image || productImage}
                       alt={product.title}
                       layout="responsive"
                       width={100}
@@ -33,7 +32,7 @@ const Carrito = () => {
                     <p className="text-sm text-gray-700">${product.price.toFixed(2)}</p>
                     <button
                       onClick={() => removeFromCart(product)}
-                      className="text-sm text-white bg-red-500 px-3 py-1 rounded-md mt-2 mr-2"
+                      className="text-sm text-white bg-red-500 px-3 py-1 rounded-md mt-2 mr-2 inline-block"
                     >
                       Quitar del Carrito
                     </button>
@@ -41,11 +40,9 @@ const Carrito = () => {
                 </li>
               ))}
             </ul>
-            <div className="mt-4">
-              <Link href="/productos/all"className="bg-black text-white px-5 py-2.5 rounded-md ml-4">
-                
-                  Volver
-                
+            <div className="mt-6 flex justify-center">
+              <Link href="/productos/all" className="bg-black text-white px-5 py-2.5 rounded-md ml-4">
+                Volver
               </Link>
               <button
                 onClick={() => {
@@ -65,6 +62,10 @@ const Carrito = () => {
 };
 
 export default Carrito;
+
+
+
+
 
 
 
