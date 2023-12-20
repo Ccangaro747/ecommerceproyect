@@ -24,11 +24,14 @@ const MenuList = ({ open, setOpen }) => {
 
         {/* Botón Carrito de Compras - Visible solo en dispositivos móviles */}
         <div className='md:hidden flex items-center gap-x-1 p-4 hover:bg-gray-100 transition-colors' onClick={handleClose}>
+        <Link href="/carrito" className='md:hidden flex items-center gap-x-1 p-4 hover:bg-gray-100 transition-colors' onClick={handleClose}>
           <IoMdCart className='text-xl' />
           <p className='text-sm font-semibold'>$0.00</p>
           <span className='bg-white text-orange-600 rounded-full text-xs font-semibold absolute -right-2 -top-1 w-5 h-5 flex items-center justify-center shadow-xl shadow-black '>
             0
           </span>
+
+      </Link>
         </div>
 
         <nav className="flex flex-col gap-5 px-4 text-gray-800">
