@@ -10,6 +10,11 @@ import { AuthProvider } from '../../contexts/AuthContext'; // Importa el AuthPro
 // Configura la fuente Inter
 const inter = Inter({ subsets: ['latin'] })
 
+export const meta: Metadata = {
+  title: 'Next.js Ecommerce Coderhouse',
+  description: 'Next.js Ecommerce Coderhouse',
+}
+
 // Define el componente RootLayout
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (

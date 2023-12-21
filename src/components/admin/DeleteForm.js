@@ -38,7 +38,7 @@ const DeleteForm = ({ item }) => {
       {showConfirmation && (
         <form className="flex flex-col items-start">
           <p>
-            ¿Estás seguro que deseas eliminar el producto "{title}"?
+            ¿Estás seguro que deseas eliminar el producto?
           </p>
 
           <label>Para confirmar, escribe "eliminar": </label>
