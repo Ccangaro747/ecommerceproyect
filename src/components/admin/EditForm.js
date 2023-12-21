@@ -1,10 +1,11 @@
 "use client";
-"use client";
+// "use client";
 import { useState } from "react";
 import Boton from "../Boton";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "@/firebase/config";
+import Link from "next/link";
 
 const updateProduct = async (slug, values, file) => {
   let fileURL = values.image;
@@ -114,7 +115,17 @@ const EditForm = ({ item }) => {
           onChange={handleChange}
         />
 
-        <Boton type="submit">Enviar</Boton>
+        <div className="flex justify-between w-full">
+          {/* Enlace para volver */}
+          <Link href="/admin"className="text-black hover:underline cursor-pointer">
+              <Boton type="button" className="bg-black text-white px-4 py-2.5 rounded hover:bg-gray-900 transition">
+                Volver
+              </Boton>
+
+          </Link>
+
+          <Boton type="submit">Enviar</Boton>
+        </div>
       </form>
     </div>
   );

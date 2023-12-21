@@ -76,12 +76,12 @@ const ProductsTable = async () => {
         Editar
       </Link>
 
-                  <Link
-                    href={`/admin/delete/${item.slug}`}
-                    className="rounded bg-red-400 p-2 text-white"
-                  >
-                    Eliminar
-                  </Link>
+      <Link
+        href={"/admin/delete"}
+        className="bg-red-500 text-white px-4 py-2.5 rounded hover:bg-red-600 transition"
+      >
+        Eliminar
+      </Link>
                 </td>
               </tr>
             ))}

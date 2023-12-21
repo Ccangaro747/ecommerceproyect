@@ -1,10 +1,10 @@
-import CreateForm from "@/components/admin/CreateForm"
+import DeleteForm from "@/components/admin/DeleteForm"
 
 const CreatePage = () => {
 
     return (
         <div>
-            <CreateForm />
+            <DeleteForm />|
         </div>
     )
 }
