@@ -1,5 +1,5 @@
 "use client";
-// "use client";
+
 import { useState } from "react";
 import Boton from "../Boton";
 import { doc, updateDoc } from "firebase/firestore";
@@ -31,12 +31,12 @@ const EditForm = ({ item }) => {
   const { title, description, inStock, price, type, image } = item || {};
 
   const [values, setValues] = useState({
-    title: title || "",
-    description: description || "",
-    inStock: inStock || 0,
-    price: price || 0,
-    type: type || "",
-    image: image || "",
+    title,
+    description,
+    inStock,
+    price,
+    type,
+    image,
   });
 
   const [file, setFile] = useState(null);
@@ -60,13 +60,6 @@ const EditForm = ({ item }) => {
   return (
     <div className="container m-auto mt-6 max-w-lg">
       <form onSubmit={handleSubmit} className="my-12">
-        <label>Imagen: </label>
-        <input
-          type="file"
-          onChange={(e) => setFile(e.target.files[0])}
-          className="p-2 rounded w-full border border-blue-100 block my-4"
-        />
-
         <label>Nombre: </label>
         <input
           type="text"
@@ -75,6 +68,12 @@ const EditForm = ({ item }) => {
           className="p-2 rounded w-full border border-blue-100 block my-4"
           name="title"
           onChange={handleChange}
+        />
+        <label>Imagen: </label>
+        <input
+          type="file"
+          onChange={(e) => setFile(e.target.files[0])}
+          className="p-2 rounded w-full border border-blue-100 block my-4"
         />
 
         <label>Precio: </label>
@@ -117,11 +116,16 @@ const EditForm = ({ item }) => {
 
         <div className="flex justify-between w-full">
           {/* Enlace para volver */}
-          <Link href="/admin"className="text-black hover:underline cursor-pointer">
-              <Boton type="button" className="bg-black text-white px-4 py-2.5 rounded hover:bg-gray-900 transition">
-                Volver
-              </Boton>
-
+          <Link
+            href="/admin"
+            className="text-black hover:underline cursor-pointer"
+          >
+            <Boton
+              type="button"
+              className="bg-black text-white px-4 py-2.5 rounded hover:bg-gray-900 transition"
+            >
+              Volver
+            </Boton>
           </Link>
 
           <Boton type="submit">Enviar</Boton>
@@ -132,6 +136,3 @@ const EditForm = ({ item }) => {
 };
 
 export default EditForm;
-
-
-

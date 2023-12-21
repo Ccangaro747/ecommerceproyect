@@ -70,7 +70,7 @@ const ProductsTable = async () => {
                 <td className="p-2 truncate max-w-prose">{item.description}</td>
                 <td className="p-2">
                 <Link
-        href={"/admin/edit"}
+        href={`/admin/edit/${item.slug}`}
         className="bg-green-500 text-white px-4 py-2.5 rounded hover:bg-green-600 transition"
       >
         Editar
