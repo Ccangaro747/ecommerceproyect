@@ -6,8 +6,9 @@ import { collection, getDocs } from "firebase/firestore";
 const getAllProducts = async () => {
   const productsRef = collection(db, "productos");
   const querySnapshot = await getDocs(productsRef);
-  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+  return querySnapshot.docs.map(doc => ({ ...doc.data(), slug: doc.id }));
 };
+
 
 const ProductsTable = async () => {
   const items = await getAllProducts();
@@ -16,7 +17,7 @@ const ProductsTable = async () => {
     <>
       <Link
         href={"/admin/create"}
-        className="rounded bg-blue-600 p-2 text-white"
+        className="bg-green-500 text-white px-4 py-2.5 rounded hover:bg-green-600 transition"
       >
         Crear nuevo
       </Link>
@@ -68,12 +69,12 @@ const ProductsTable = async () => {
                 <td className="p-2">{item.slug}</td>
                 <td className="p-2 truncate max-w-prose">{item.description}</td>
                 <td className="p-2">
-                  <Link
-                    href={`/admin/edit/${item.slug}`}
-                    className="rounded bg-green-400 p-2 text-white"
-                  >
-                    Editar
-                  </Link>
+                <Link
+        href={"/admin/edit"}
+        className="bg-green-500 text-white px-4 py-2.5 rounded hover:bg-green-600 transition"
+      >
+        Editar
+      </Link>
 
                   <Link
                     href={`/admin/delete/${item.slug}`}
