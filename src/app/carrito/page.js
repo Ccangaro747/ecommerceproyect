@@ -41,18 +41,10 @@ const Carrito = () => {
               ))}
             </ul>
             <div className="mt-6 flex justify-center">
-              <Link href="/productos/all" className="bg-black text-white px-5 py-2.5 rounded-md ml-4">
-                Volver
+              <Link href="/productos/all"className="bg-black text-white px-5 py-2.5 rounded-md ml-4">Volver
               </Link>
-              <button
-                onClick={() => {
-                  // Lógica para la acción de comprar
-                  console.log("Compra realizada");
-                }}
-                className="bg-green-500 text-white px-4 py-2 rounded-md ml-4"
-              >
-                Comprar
-              </button>
+              <Link href="/carrito/generarorden"className="bg-green-500 text-white px-4 py-2 rounded-md ml-4">Comprar
+              </Link>
             </div>
           </>
         )}
@@ -62,6 +54,7 @@ const Carrito = () => {
 };
 
 export default Carrito;
+
 
 
 
