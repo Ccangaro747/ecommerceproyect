@@ -15,9 +15,29 @@ export const AuthProvider = ({children}) => {
     })
 
     const createUser = async (values) => {
-        await createUserWithEmailAndPassword(auth, values.email, values.password)
-    }
-
+        try {
+            // Valido la dirección de correo electrónico
+            if (!values.email || !values.email.trim()) {
+                throw new Error("La dirección de correo electrónico no puede estar vacía.");
+            }
+    
+            await createUserWithEmailAndPassword(auth, values.email, values.password);
+            console.log("Usuario creado exitosamente");
+        } catch (error) {
+            console.error("Error al crear el usuario:", error.message);
+            throw error;
+        }
+    };
+    
+    const registerUser = async (values) => {
+        try {
+            await createUserWithEmailAndPassword(auth, values.email, values.password);
+            console.log("Usuario creado exitosamente");
+        } catch (error) {
+            console.error("Error al crear el usuario:", error.message);
+            throw error;
+        }
+    };
     const loginUser = async (values) => {
         await signInWithEmailAndPassword(auth, values.email, values.password)
     }

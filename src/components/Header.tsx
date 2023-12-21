@@ -1,6 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getFirestore, collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  onSnapshot,
+} from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import Container from "./Container";
 import Logo from "./Logo";
@@ -13,7 +19,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Header = () => {
-  const { cart, calculateTotal, addToCart, removeFromCart, isInCart } = useCartContext();
+  const { cart, calculateTotal, addToCart, removeFromCart, isInCart } =
+    useCartContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
 
@@ -127,16 +134,14 @@ const Header = () => {
 
         {/* Botón del carrito - Solo visible en dispositivos mayores a 'md' */}
         <div className="hidden md:flex bg-black hover:bg-slate-950 rounded-full text-slate-100 hover:text-white items-center justify-center gap-x-1 px-3 py-1.5 border-[1px] border-black hover:border-orange-600 duration-200 relative">
-  <Link href="/carrito" className="flex items-center justify-center">
-    
-      <IoMdCart className="text-xl" />
-      <p className="text-sm font-semibold">{calculateTotal()}</p>
-      <span className="bg-white text-orange-600 rounded-full text-xs font-semibold absolute -right-2 -top-1 w-5 h-5 flex items-center justify-center shadow-xl shadow-black ">
-        {cart.length}
-      </span>
-
-  </Link>
-</div>
+          <Link href="/carrito" className="flex items-center justify-center">
+            <IoMdCart className="text-xl" />
+            <p className="text-sm font-semibold">{calculateTotal()}</p>
+            <span className="bg-white text-orange-600 rounded-full text-xs font-semibold absolute -right-2 -top-1 w-5 h-5 flex items-center justify-center shadow-xl shadow-black ">
+              {cart.length}
+            </span>
+          </Link>
+        </div>
 
         {/* Menú desplegable */}
         <Menu />
@@ -146,5 +151,3 @@ const Header = () => {
 };
 
 export default Header;
-
-

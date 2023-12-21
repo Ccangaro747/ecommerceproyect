@@ -1,14 +1,27 @@
 "use client"
-import { useAuthContext } from "@/contexts/AuthContext"
+// @/app/admin/layout.js
+import { useAuthContext } from "@/contexts/AuthContext";
 
-const AdminLayout = ({children, login}) => {
-    const { user } = useAuthContext()
+const AdminLayout = ({ children, login }) => {
+  const { user } = useAuthContext();
 
-    return (
+  return (
+    <div>
+      {user.logged ? (
         <div>
-            { user.logged ? children : login }
+          <p>Bienvenido, {user.email}!</p>
+          {children}
         </div>
-    )
-}
+      ) : (
+        <div>
+          <p>Inicia sesión para acceder al contenido.</p>
+          {login}
+        </div>
+      )}
+    </div>
+  );
+};
 
-export default AdminLayout
+export default AdminLayout;
+
+
