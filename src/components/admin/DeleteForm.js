@@ -1,4 +1,4 @@
-"use client"
+"use client";
 // "use client";
 import { useState } from "react";
 import Boton from "../Boton";
@@ -37,11 +37,10 @@ const DeleteForm = ({ item }) => {
     <div className="container m-auto mt-6 max-w-lg">
       {showConfirmation && (
         <form className="flex flex-col items-start">
-          <p>
-            ¿Estás seguro que deseas eliminar el producto?
-          </p>
+          <p>¿Estás seguro que deseas eliminar el producto?</p>
 
-          <label>Para confirmar, escribe "eliminar": </label>
+          <label>Para confirmar, escribe &ldquo;eliminar&rdquo;: </label>
+
           <input
             type="text"
             value={confirmation}
@@ -52,14 +51,23 @@ const DeleteForm = ({ item }) => {
 
           <div className="flex justify-between w-full">
             {/* Enlace para volver */}
-            <Link href="/admin"className="text-black hover:underline cursor-pointer">
-                <Boton type="button" className="bg-black text-white px-4 py-2.5 rounded hover:bg-gray-900 transition">
-                  Volver
-                </Boton>
-
+            <Link
+              href="/admin"
+              className="text-black hover:underline cursor-pointer"
+            >
+              <Boton
+                type="button"
+                className="bg-black text-white px-4 py-2.5 rounded hover:bg-gray-900 transition"
+              >
+                Volver
+              </Boton>
             </Link>
 
-            <Boton type="button" onClick={handleDelete} className="bg-red-500 text-white px-4 py-2.5 rounded hover:bg-red-600 transition">
+            <Boton
+              type="button"
+              onClick={handleDelete}
+              className="bg-red-500 text-white px-4 py-2.5 rounded hover:bg-red-600 transition"
+            >
               Eliminar Producto
             </Boton>
           </div>
@@ -67,21 +75,23 @@ const DeleteForm = ({ item }) => {
       )}
 
       {!showConfirmation && (
-        <p>Producto eliminado correctamente. <Link href="/admin"className="text-black hover:underline cursor-pointer">
-          <Boton type="button" className="bg-black text-white px-4 py-2.5 rounded hover:bg-gray-900 transition">
-            Volver
-          </Boton>
-        </Link></p>
+        <p>
+          Producto eliminado correctamente.{" "}
+          <Link
+            href="/admin"
+            className="text-black hover:underline cursor-pointer"
+          >
+            <Boton
+              type="button"
+              className="bg-black text-white px-4 py-2.5 rounded hover:bg-gray-900 transition"
+            >
+              Volver
+            </Boton>
+          </Link>
+        </p>
       )}
     </div>
   );
 };
 
 export default DeleteForm;
-
-
-
-
-
-
-
