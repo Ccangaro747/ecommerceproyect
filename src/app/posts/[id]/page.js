@@ -1,5 +1,7 @@
 
-import { useRouter } from "next/router";
+"use client"
+
+import { useRouter } from "next/navigation";
 import { getPostById } from "../utils";
 import Boton from "@/components/Boton";
 
