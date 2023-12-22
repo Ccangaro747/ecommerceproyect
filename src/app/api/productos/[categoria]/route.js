@@ -1,16 +1,18 @@
-import { mockData } from "@/data/product"
-import { NextResponse } from "next/server"
+import { mockData } from "@/data/product";
+import { NextResponse } from "next/server";
 
-const sleep = async (timer) => new Promise((resolve) => setTimeout(resolve, timer))
+const sleep = async (timer) =>
+  new Promise((resolve) => setTimeout(resolve, timer));
 
 export const GET = async (_, { params }) => {
-    const { categoria } = params
-    
-    const items = categoria === 'all'
-                    ? mockData
-                    : mockData.filter(product => product.type === categoria)
+  const { categoria } = params;
 
-    await sleep(1000)
+  const items =
+    categoria === "all"
+      ? mockData
+      : mockData.filter((product) => product.type === categoria);
 
-    return NextResponse.json(items)
-}
+  await sleep(1000);
+
+  return NextResponse.json(items);
+};
