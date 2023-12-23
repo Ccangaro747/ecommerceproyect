@@ -88,13 +88,6 @@ const MenuList = ({ open, setOpen }) => {
           >
             Panel de administracion
           </Link>
-          <Link
-            className="hover:text-gray-500 text-lg mb-4"
-            onClick={handleClose}
-            href={"/posts"}
-          >
-            Posts
-          </Link>
         </nav>
       </aside>
     </div>

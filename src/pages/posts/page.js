@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import { getPosts } from "./utils";
+import { getPosts } from "../../../pages/posts/utils";
 import Link from "next/link";
 
 const Posts = () => {
