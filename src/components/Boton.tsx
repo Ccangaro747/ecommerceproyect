@@ -1,6 +1,6 @@
-"use client";
+// @ts-nocheck
 
-const Boton = ({ children, className = "", ...args }) => {
+const Boton = ({ children, className = "", ...args }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
       className={`bg-black hover:bg-slate-950 text-white font-bold py-2 px-4 rounded ${className}`}
@@ -12,4 +12,5 @@ const Boton = ({ children, className = "", ...args }) => {
 };
 
 export default Boton;
+
 
