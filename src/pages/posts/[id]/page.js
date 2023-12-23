@@ -1,6 +1,6 @@
 "use client"
-import { useRouter } from "next/navigation";
-import { getPostById } from "./utils";
+import { useRouter } from "next/router";  // Cambiado de next/navigation a next/router
+import { getPostById } from "../utils";  // Ruta ajustada para reflejar la ubicación correcta
 import Boton from "@/components/Boton";
 
 const fetchData = async (id) => {
@@ -14,7 +14,7 @@ const fetchData = async (id) => {
 };
 
 const Post = ({ post }) => {
-  const { back } = useRouter();
+  const router = useRouter();
 
   if (!post) {
     return <p>Cargando...</p>;
@@ -26,7 +26,7 @@ const Post = ({ post }) => {
       <hr />
       <p>{post.body}</p>
 
-      <Boton className="my-8" onClick={back}>
+      <Boton className="my-8" onClick={() => router.back()}>
         Volver
       </Boton>
     </div>
@@ -45,6 +45,7 @@ export async function getServerSideProps({ params }) {
 }
 
 export default Post;
+
 
 
 
