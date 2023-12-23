@@ -12,3 +12,4 @@ const Boton = ({ children, className = "", ...args }) => {
 };
 
 export default Boton;
+
