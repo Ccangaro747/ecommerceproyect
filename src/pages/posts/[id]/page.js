@@ -1,6 +1,6 @@
 "use client"
 import { useRouter } from "next/navigation";
-import { getPostById } from "../../../pages/posts/utils";
+import { getPostById } from "./utils";
 import Boton from "@/components/Boton";
 
 const fetchData = async (id) => {
