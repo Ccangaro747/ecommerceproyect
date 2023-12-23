@@ -4,6 +4,16 @@ import { useCartContext } from "../../contexts/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 
+type Product = {
+  description: string;
+  image: string;
+  inStock: number;
+  price: number;
+  slug: string;
+  title: string;
+  type: string;
+};
+
 const Carrito: React.FC = () => {
   const { cart, removeFromCart } = useCartContext();
 
@@ -16,11 +26,11 @@ const Carrito: React.FC = () => {
         ) : (
           <>
             <ul className="list-none p-0">
-              {cart.map((product) => (
-                <li key={product.id} className="flex items-center py-4 border-b border-gray-300">
+              {cart.map((product: Product) => (
+                <li key={product.slug} className="flex items-center py-4 border-b border-gray-300">
                   <div className="w-20 h-20 mr-4">
                     <Image
-                      src={product.image || productImage}
+                      src={product.image}
                       alt={product.title}
                       layout="responsive"
                       width={100}
@@ -56,3 +66,4 @@ const Carrito: React.FC = () => {
 };
 
 export default Carrito;
+
