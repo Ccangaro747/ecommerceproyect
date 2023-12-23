@@ -1,17 +1,8 @@
 "use client"
-import { useRouter } from "next/router";  // Cambiado de next/navigation a next/router
-import { getPostById } from "../utils";  // Ruta ajustada para reflejar la ubicación correcta
+// pages/posts/[id]/page.js
+import { useRouter } from "next/router";
 import Boton from "@/components/Boton";
-
-const fetchData = async (id) => {
-  try {
-    const postData = await getPostById(id);
-    return postData;
-  } catch (error) {
-    console.error("Error fetching post:", error);
-    return null;
-  }
-};
+import { getPostById } from "../utils";
 
 const Post = ({ post }) => {
   const router = useRouter();
@@ -33,18 +24,8 @@ const Post = ({ post }) => {
   );
 };
 
-export async function getServerSideProps({ params }) {
-  const { id } = params;
-  const post = await fetchData(id);
-
-  return {
-    props: {
-      post,
-    },
-  };
-}
-
 export default Post;
+
 
 
 
