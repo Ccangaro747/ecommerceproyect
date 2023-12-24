@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import Container from "./Container";
 
 const ContactForm = () => {
@@ -9,7 +10,7 @@ const ContactForm = () => {
     message: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -17,7 +18,7 @@ const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     // Agregar lógica
@@ -80,7 +81,7 @@ const ContactForm = () => {
             value={formData.message}
             onChange={handleChange}
             className="w-full border rounded-md py-2 px-3 leading-tight focus:outline-none focus:shadow-outline-gray resize-none"
-            rows="4"
+            rows={4}
             required
           />
         </div>
@@ -97,3 +98,4 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+

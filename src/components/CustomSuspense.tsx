@@ -16,7 +16,7 @@ interface CustomSuspenseProps {
 const LoadingSpinner = () => (
   <div className="text-center mt-4">
     <p className="text-lg font-semibold">Cargando productos...</p>
-    <ClipLoader color={"#36D7B7"} loading={true} css={override} size={70} />
+    <ClipLoader color={"#36D7B7"} loading={true} size={70} />
   </div>
 );
 
@@ -25,3 +25,4 @@ const CustomSuspense: React.FC<CustomSuspenseProps> = ({ children }) => (
 );
 
 export default CustomSuspense;
+

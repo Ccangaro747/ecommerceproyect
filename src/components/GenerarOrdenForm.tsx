@@ -8,9 +8,10 @@ const GenerarOrdenForm = () => {
   const { cart, clearCart } = useCartContext();
   const { user } = useAuthContext();
 
+  // Inicializar el estado del formulario con la información del usuario (si está disponible)
   const [customerInfo, setCustomerInfo] = useState({
-    name: user.name || '',
-    email: user.email || '',
+    name: user?.name || '',
+    email: user?.email || '',
     cardNumber: '',
     // Otros campos según tus necesidades
   });
@@ -96,7 +97,8 @@ const GenerarOrdenForm = () => {
 
         <div className="flex justify-between">
           {/* Botón Volver en negro */}
-          <Link href="/productos/all"className="bg-black text-white px-5 py-2.5 rounded-md">Volver
+          <Link href="/productos/all" className="bg-black text-white px-5 py-2.5 rounded-md">
+            Volver
           </Link>
 
           {/* Botón Terminar Compra */}
@@ -114,4 +116,5 @@ const GenerarOrdenForm = () => {
 };
 
 export default GenerarOrdenForm;
+
 
