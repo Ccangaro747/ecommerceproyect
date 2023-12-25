@@ -2,7 +2,7 @@
 // pages/posts/[id]/page.js
 import { useRouter } from "next/router";
 import Boton from "@/components/Boton";
-import { getPostById } from "../utils";
+import { getPostById } from "../../../utils/utils";
 
 const Post = ({ post }) => {
   const router = useRouter();
