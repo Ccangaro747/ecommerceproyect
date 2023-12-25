@@ -22,8 +22,19 @@ const Header = () => {
   const { cart, calculateTotal, addToCart, removeFromCart, isInCart } =
     useCartContext();
   const [searchTerm, setSearchTerm] = useState("");
-  const [products, setProducts] = useState([]);
-
+  // Especifica el tipo del estado inicial para products
+  const [products, setProducts] = useState<
+    {
+      id: string;
+      title: string;
+      description: string;
+      image: string;
+      inStock: number;
+      price: number;
+      slug: string;
+      type: string;
+    }[]
+  >([]);
   useEffect(() => {
     // Configuración de Firebase
     const firebaseConfig = {
@@ -49,7 +60,13 @@ const Header = () => {
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data(),
+        title: doc.data().title,
+        description: doc.data().description,
+        image: doc.data().image,
+        inStock: doc.data().inStock,
+        price: doc.data().price,
+        slug: doc.data().slug,
+        type: doc.data().type,
       }));
       setProducts(data);
     });
@@ -58,7 +75,7 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleSearchChange = (event) => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value.toLowerCase();
     setSearchTerm(searchTerm);
   };

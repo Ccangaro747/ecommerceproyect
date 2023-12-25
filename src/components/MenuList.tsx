@@ -3,7 +3,12 @@ import Link from "next/link";
 import { IoMdCart } from "react-icons/io";
 import { AiOutlineUser } from "react-icons/ai";
 
-const MenuList = ({ open, setOpen }) => {
+interface MenuListProps {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const MenuList: React.FC<MenuListProps> = ({ open, setOpen }) => {
   const handleClose = () => setOpen(false);
 
   return (
